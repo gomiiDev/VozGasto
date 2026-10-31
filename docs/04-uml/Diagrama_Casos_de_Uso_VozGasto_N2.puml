@@ -1,0 +1,128 @@
+@startuml CU_N2_Detalle_VozGasto
+' Voz Gasto - Tarea 3, Grupo 04, NRC 36848
+' Nivel 2 (detalle, nivel objetivo de usuario y subfuncion de Cockburn).
+' Diagrama preliminar del grupo, agrupado por los modulos M1 a M7 del Nivel 1.
+' Casos sombreados: casos incluidos (subfuncion, no son objetivos del actor).
+' CU19 (borde punteado y nota): version futura, HU17 Won't por ahora, fuera del MVP.
+' Condicion del extend en EP01: limite positivo y umbral (80 % o exceso) no notificado en el mes.
+left to right direction
+skinparam dpi 200
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 17
+skinparam ArrowColor #23384F
+skinparam ArrowFontSize 14
+skinparam ArrowFontColor #23384F
+skinparam packageStyle rectangle
+skinparam nodesep 4
+skinparam ranksep 18
+skinparam actorBorderColor #11253F
+skinparam actorBackgroundColor white
+skinparam rectangle {
+  BorderColor #11253F
+  FontSize 18
+  FontStyle bold
+}
+skinparam usecase {
+  BackgroundColor white
+  BorderColor #11253F
+  BackgroundColor<<incluido>> #DDF1EF
+  BackgroundColor<<modulo>> #EAF0F7
+  BackgroundColor<<sistema>> #EAF0F7
+  BackgroundColor<<futuro>> #F1F3F5
+  BorderColor<<futuro>> #7A8793
+  FontColor<<futuro>> #4A5560
+  StereotypeFontSize 13
+}
+skinparam note {
+  BackgroundColor #FFFDF2
+  BorderColor #9A8F5A
+  FontSize 15
+}
+
+skinparam package {
+  BorderColor #5B6F86
+  FontSize 15
+  FontStyle bold
+  BackgroundColor #FBFCFE
+}
+
+actor "A1 Visitante" as A1
+actor "A2 Usuario\nregistrado" as A2
+actor "A5 Entidad\nbancaria\n(futuro)" as A5
+
+rectangle "Sistema Voz Gasto" {
+  package "M1 Gestionar cuenta" {
+    usecase "CU01 Registrarse" as CU01
+    usecase "CU02 Iniciar sesión" as CU02
+    usecase "CU03 Cerrar sesión" as CU03
+    usecase "CU04 Gestionar perfil" as CU04
+  }
+  package "M2 Gestionar categorías" {
+    usecase "CU05 Gestionar\ncategorías" as CU05
+  }
+  package "M3 Gestionar movimientos manuales" {
+    usecase "CU06 Registrar\ningreso manualmente" as CU06
+    usecase "CU07 Registrar\ngasto manualmente" as CU07
+    usecase "CU08 Editar\nmovimiento" as CU08
+    usecase "CU09 Eliminar\nmovimiento" as CU09
+  }
+  package "M4 Registrar movimientos por voz" {
+    usecase "CU10 Registrar\nmovimiento por voz" as CU10
+    usecase "CU11 Transcribir\ne interpretar frase" as CU11 <<incluido>>
+    usecase "CU12 Confirmar o\ncorregir movimiento" as CU12 <<incluido>>
+  }
+  package "M5 Controlar presupuesto, saldo y alertas" {
+    usecase "CU13 Configurar\npresupuesto mensual" as CU13
+    usecase "CU14 Consultar\nsaldo disponible" as CU14
+    usecase "CU15 Actualizar saldo\ndel presupuesto\n--\nPunto de extensión\nEP01 Evaluar umbral" as CU15 <<incluido>>
+    usecase "CU16 Emitir\nalerta de límite" as CU16
+  }
+  package "M6 Consultar reportes e historial" {
+    usecase "CU17 Consultar\nreportes" as CU17
+    usecase "CU18 Consultar\nhistorial de movimientos" as CU18
+  }
+  package "M7 Integrar banca (futuro)" {
+    usecase "CU19 Conectar\ncuenta bancaria" as CU19 <<futuro>> #line.dashed
+  }
+}
+
+actor "A3 Servicio de\nreconocimiento\nde voz" as A3
+actor "A4 Servicio de\nnotificaciones" as A4
+
+A1 -- CU01
+A2 -- CU02
+A2 -- CU03
+A2 -- CU04
+A2 -- CU05
+A2 -- CU06
+A2 -- CU07
+A2 -- CU08
+A2 -- CU09
+A2 -- CU10
+A2 -- CU13
+A2 -- CU14
+A2 -- CU17
+A2 -- CU18
+A2 -- CU19
+A5 -- CU19
+
+CU10 ..> CU11 : <<include>>
+CU10 ..> CU12 : <<include>>
+CU06 ...> CU15 : <<include>>
+CU07 ...> CU15 : <<include>>
+CU08 ...> CU15 : <<include>>
+CU09 ...> CU15 : <<include>>
+CU12 ..> CU15 : <<include>>
+CU15 <.. CU16 : <<extend>>\n[umbral no notificado]
+
+CU11 -- A3
+CU16 -- A4
+
+note right of CU19
+  Versión futura
+  HU17 «Won't por ahora»,
+  fuera del MVP
+end note
+@enduml
