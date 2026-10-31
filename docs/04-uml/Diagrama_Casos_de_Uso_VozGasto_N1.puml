@@ -1,0 +1,87 @@
+@startuml CU_N1_Modulos_VozGasto
+' Voz Gasto - Tarea 3, Grupo 04, NRC 36848
+' Nivel 1 (modulos, nivel resumen o "cometa" de Cockburn).
+' Cada modulo agrupa casos de uso del Nivel 2 y conserva los actores que los usan.
+' Los include entre modulos resumen los include de CU06-CU09 y CU12 hacia CU15.
+left to right direction
+skinparam dpi 200
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Calibri
+skinparam defaultFontSize 17
+skinparam ArrowColor #23384F
+skinparam ArrowFontSize 14
+skinparam ArrowFontColor #23384F
+skinparam packageStyle rectangle
+skinparam nodesep 4
+skinparam ranksep 18
+skinparam actorBorderColor #11253F
+skinparam actorBackgroundColor white
+skinparam rectangle {
+  BorderColor #11253F
+  FontSize 18
+  FontStyle bold
+}
+skinparam usecase {
+  BackgroundColor white
+  BorderColor #11253F
+  BackgroundColor<<incluido>> #DDF1EF
+  BackgroundColor<<modulo>> #EAF0F7
+  BackgroundColor<<sistema>> #EAF0F7
+  BackgroundColor<<futuro>> #F1F3F5
+  BorderColor<<futuro>> #7A8793
+  FontColor<<futuro>> #4A5560
+  StereotypeFontSize 13
+}
+skinparam note {
+  BackgroundColor #FFFDF2
+  BorderColor #9A8F5A
+  FontSize 15
+}
+
+skinparam package {
+  BorderColor #5B6F86
+  FontSize 15
+  FontStyle bold
+  BackgroundColor #FBFCFE
+}
+
+actor "A1 Visitante" as A1
+actor "A2 Usuario\nregistrado" as A2
+actor "A5 Entidad\nbancaria\n(futuro)" as A5
+
+rectangle "Sistema Voz Gasto" {
+  usecase "M1 Gestionar cuenta\n(CU01 a CU04)" as M1 <<modulo>>
+  usecase "M2 Gestionar categorías\n(CU05)" as M2 <<modulo>>
+  usecase "M3 Gestionar movimientos\nmanuales (CU06 a CU09)" as M3 <<modulo>>
+  usecase "M4 Registrar movimientos\npor voz (CU10 a CU12)" as M4 <<modulo>>
+  usecase "M5 Controlar presupuesto,\nsaldo y alertas (CU13 a CU16)" as M5 <<modulo>>
+  usecase "M6 Consultar reportes\ne historial (CU17 y CU18)" as M6 <<modulo>>
+  usecase "M7 Integrar banca\n(CU19)" as M7 <<futuro>> #line.dashed
+}
+
+actor "A3 Servicio de\nreconocimiento\nde voz" as A3
+actor "A4 Servicio de\nnotificaciones" as A4
+
+A1 -- M1
+A2 -- M1
+A2 -- M2
+A2 -- M3
+A2 -- M4
+A2 -- M5
+A2 -- M6
+A2 -- M7
+A5 -- M7
+
+M3 ..> M5 : <<include>>\n(CU15)
+M4 ..> M5 : <<include>>\n(CU15)
+
+M4 -- A3
+M5 -- A4
+
+note right of M7
+  Versión futura
+  HU17 «Won't por ahora»,
+  fuera del MVP
+end note
+@enduml
