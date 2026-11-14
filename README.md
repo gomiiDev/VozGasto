@@ -43,6 +43,7 @@ infra/     Docker y despliegue
 | [03-documentacion](docs/03-documentacion/) | Documento de la necesidad (protocolo) |
 | [04-uml](docs/04-uml/) | Diagramas de casos de uso (nivel 1 y 2) |
 | [05-arquitectura](docs/05-arquitectura/) | Arquitectura de la aplicación (Taller 1) |
+| [06-pruebas](docs/06-pruebas/) | Estrategia de pruebas y banco de frases |
 
 ## Ramas
 
