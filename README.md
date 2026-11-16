@@ -58,3 +58,9 @@ Usamos GitHub Flow con una rama por issue: `main` está protegida y todo entra p
 4. Fusionar con **Squash and merge**.
 
 Las reglas y la definición de terminado están en [CONTRIBUTING.md](CONTRIBUTING.md). Los roles, los eventos y los artefactos están en [docs/proceso/PROCESO.md](docs/proceso/PROCESO.md).
+
+## Sprint actual
+
+**Sprint 2 (semanas 3 y 4).** Objetivo: una persona puede crear su cuenta, iniciar sesión y registrar un ingreso desde la app contra el backend levantado con Docker, con la CI en verde; además, entregamos el informe del prototipo de voz con 30 frases.
+
+Historias del sprint: HU1, HU2 y HU3, más las tareas T2 a T7. El avance está en el Project del repositorio.
