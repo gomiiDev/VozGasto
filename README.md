@@ -8,11 +8,13 @@ Aplicación móvil para registrar ingresos y gastos por voz, clasificarlos por c
 
 ## Integrantes
 
-| Integrante | Rol |
-|---|---|
-| Antonio Revilla | Líder del proyecto y backend |
-| Carlos Granda | Módulo de voz, PLN y pruebas |
-| Carlos Hernández | App móvil en Flutter |
+| Integrante | Área técnica | Rol en el sprint 1 | Rol en el sprint 2 |
+|---|---|---|---|
+| Antonio Revilla | Backend | Líder | Calidad y DevOps |
+| Carlos Granda | Voz, PLN y pruebas | Analista | Líder |
+| Carlos Hernández | App móvil en Flutter | Calidad y DevOps | Analista |
+
+Las áreas técnicas son fijas. Los roles del proceso rotan cada sprint según el [plan de rotación](docs/proceso/PROCESO.md#b3-plan-de-rotación).
 
 ## Arquitectura
 
@@ -27,11 +29,11 @@ El detalle está en [docs/05-arquitectura/](docs/05-arquitectura/).
 ## Estructura del repositorio
 
 ```
-docs/      Documentación del proyecto (definición, requisitos, UML, arquitectura, pruebas)
+docs/      Documentación del proyecto (definición, requisitos, UML, arquitectura, pruebas, proceso)
 backend/   Servidor FastAPI organizado en capas
 mobile/    App Flutter organizada con MVC
 infra/     Docker y despliegue
-.github/   Plantillas de PR e issues, y flujos de CI
+.github/   Plantillas de PR e issues, script de configuración y flujos de CI
 ```
 
 ## Documentación
@@ -44,13 +46,21 @@ infra/     Docker y despliegue
 | [04-uml](docs/04-uml/) | Diagramas de casos de uso (nivel 1 y 2) |
 | [05-arquitectura](docs/05-arquitectura/) | Arquitectura de la aplicación (Taller 1) |
 | [06-pruebas](docs/06-pruebas/) | Estrategia de pruebas y banco de frases |
+| [proceso](docs/proceso/) | Proceso del equipo y actas de retrospectiva |
 
-## Ramas
+## Cómo trabajar
 
-| Rama | Uso |
-|---|---|
-| `main` | Versiones entregadas, cada una con su tag |
-| `testing` | Revisión y pruebas antes de pasar a `main` |
-| `develop` | Integración del trabajo del equipo |
+Usamos GitHub Flow con una rama por issue: `main` está protegida y todo entra por un pull request revisado.
 
-El flujo de trabajo está en [CONTRIBUTING.md](CONTRIBUTING.md).
+1. Tomar un issue del tablero y crear la rama `tipo/N-descripcion` desde `main`.
+2. Hacer commits `tipo: descripción (#N)`.
+3. Abrir un PR hacia `main` con `Closes #N`. Otro integrante lo revisa y lo aprueba.
+4. Fusionar con **Squash and merge**.
+
+Las reglas y la definición de terminado están en [CONTRIBUTING.md](CONTRIBUTING.md). Los roles, los eventos y los artefactos están en [docs/proceso/PROCESO.md](docs/proceso/PROCESO.md).
+
+## Sprint actual
+
+**Sprint 2 (semanas 3 y 4).** Objetivo: una persona puede crear su cuenta, iniciar sesión y registrar un ingreso desde la app contra el backend levantado con Docker, con la CI en verde; además, entregamos el informe del prototipo de voz con 30 frases.
+
+Historias del sprint: HU1, HU2 y HU3, más las tareas T2 a T7. El avance está en el Project del repositorio.
